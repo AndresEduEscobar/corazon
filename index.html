@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Aún me amas?</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    
+    #texto {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    
+    #opciones {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .opcion {
+        padding: 10px 20px;
+        margin: 0 10px;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+    
+    .opcion:hover {
+        background-color: #f0f0f0;
+    }
+    
+    #mensaje {
+        display: none;
+        margin-top: 20px;
+        font-size: 18px;
+    }
+
+    .confeti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        animation: confeti-fall linear 3s infinite;
+    }
+
+    @keyframes confeti-fall {
+        0% {
+            transform: translateY(-100vh) rotateZ(0deg);
+        }
+        100% {
+            transform: translateY(100vh) rotateZ(360deg);
+        }
+    }
+</style>
+</head>
+<body>
+    <div id="texto">¿Aún me amas?</div>
+    <div id="opciones">
+        <div class="opcion" id="si">Si</div>
+        <div class="opcion" id="no">No</div>
+    </div>
+    <div id="mensaje">Ya sabía que aún me amabas, ¡yo también te amo, corazón de melón!</div>
+
+    <!-- Confeti -->
+    <div id="confeti-container"></div>
+
+<script>
+    // Seleccionar elementos del DOM
+    const opcionSi = document.getElementById('si');
+    const opcionNo = document.getElementById('no');
+    const mensaje = document.getElementById('mensaje');
+    const confetiContainer = document.getElementById('confeti-container');
+
+    // Agregar evento click a la opción "Si"
+    opcionSi.addEventListener('click', function() {
+        mensaje.style.display = 'block'; // Mostrar el mensaje
+        lanzarConfeti(); // Lanzar la animación de confeti
+        opcionNo.style.pointerEvents = 'none'; // Deshabilitar clics en "No"
+        this.style.pointerEvents = 'none'; // Deshabilitar clics en "Si"
+    });
+
+    // Función para lanzar confeti
+    function lanzarConfeti() {
+        for (let i = 0; i < 100; i++) {
+            const confeti = document.createElement('div');
+            confeti.className = 'confeti';
+            confeti.style.left = Math.random() * window.innerWidth + 'px';
+            confetiContainer.appendChild(confeti);
+
+            // Eliminar confeti después de la animación
+            setTimeout(() => {
+                confeti.remove();
+            }, 3000);
+        }
+    }
+</script>
+</body>
+</html>
